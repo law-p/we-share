@@ -33,8 +33,6 @@ Route::put('/share/{share}', [ShareController::class, 'update'] )->name('weshare
 Route::post('/share/{share}/comments', [CommentController::class, 'store'] )->name('weshare.comments.store')->middleware('auth');
 
 
-Route::get('/profile', [ProfileController::class, 'profile'] )->name('profile');
-
 Route::get('/register', [RegisterController::class, 'register'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 
@@ -43,5 +41,9 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'auth']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-
+Route::get('/profile', [UserController::class, 'profile'])->middleware('auth');
 Route::resource('users', UserController::class)->only('edit', 'show', 'update')->middleware('auth');
+
+Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+
+
