@@ -8,6 +8,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ShareController;
 use App\Http\Controllers\ShowController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FollowerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,7 +44,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/profile', [UserController::class, 'profile'])->middleware('auth');
 Route::resource('users', UserController::class)->only('edit', 'show', 'update')->middleware('auth');
-
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
 
+Route::post('users/{user}/follow', [FollowerController::class,'follow'])->middleware('auth')->name('users.follow');
+Route::post('users/{user}/unfollow', [FollowerController::class,'unfollow'])->middleware('auth')->name('users.unfollow');

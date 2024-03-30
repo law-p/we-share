@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\WelcomeMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -22,12 +24,15 @@ class RegisterController extends Controller
             'password' => 'required|confirmed',
         ]);
     
-        User::create([
+       $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
-    
+
+        Mail::to($user->email)->send(new WelcomeMail($user));
+
+
         return redirect()->route('dashboard')->with('flash-msg', 'Account successfully created' );
     }
     
