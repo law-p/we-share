@@ -34,28 +34,23 @@ class ShareController extends Controller
 
     public function destroy(Share $id){
         
-        if (auth()->id() !== $id -> user_id){
-            abort(404,'You dont have permission to perform this action');
-        }
+        $this->authorize('delete', $id);
 
-    $id->delete();
-    return redirect()->route('dashboard')->with('flash-msg', 'Share deleted successfully.');
+        $id->delete();
+        
+        return redirect()->route('dashboard')->with('flash-msg', 'Share deleted successfully.');
     }
 
     public function show(Share $share) {
 
-        if (auth()->id() !== $share -> user_id){
-            abort(404);
-        }
-
+        $this->authorize('update', $share);
+        
         return view('show', compact('share'));
     } 
 
     public function edit(Share $share) {
 
-        if (auth()->id() !== $share -> user_id){
-            abort(404);
-        }
+        $this->authorize('update', $share);
 
         $editting = true;
         return view('show', compact('share', 'editting'));
@@ -63,9 +58,7 @@ class ShareController extends Controller
     
     public function update(Request $request, Share $share) {
 
-        if (auth()->id() !== $share -> user_id){
-            abort(404);
-        }
+        $this->authorize('update', $share);
         
         $request->validate(['content' => 'required|min:10|max:250']);
     

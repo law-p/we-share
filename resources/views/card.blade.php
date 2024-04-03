@@ -12,6 +12,7 @@
          
             <div>
                 @auth
+                @can('update', $share)
                <form method="POST" action="{{route('weshare.destroy', $share->id)}}">
                 @method('delete')
                 @csrf
@@ -19,6 +20,7 @@
                 <button class="btn btn-danger btn-sm">Delete</button>
                 <a href="{{route('weshare.show', $share->id)}}" class="mx-2">View</a>
                </form>
+               @endcan
                @endauth
             </div>
            
@@ -53,7 +55,7 @@
            @include('like')
             <div>
                 <span class="fs-6 fw-light text-muted"> <span class="fas fa-clock"> </span>
-                {{$share -> created_at}} </span>
+                {{$share -> created_at->diffForHumans()}} </span>
             </div>
         </div>
        @include('comments')

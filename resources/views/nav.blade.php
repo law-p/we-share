@@ -17,8 +17,13 @@
                 @endguest
                 
                 @auth
+                @if (Auth::user()->is_admin)
                 <li class="nav-item">
-                <a class="nav-link" href="{{route('profile')}}"><span class="mx-2">Hello,</span>{{Auth::user()->name}}</a>
+                   <button class="btn btn-danger btn-sm"> <a class="nav-link text-white" href="{{route('admin.dashboard')}}"><span class="mx-2 text-dark"></span>Go To Admin Dashboard</a></button>
+                </li>
+                @endif
+                <li class="nav-item">
+                <a class="nav-link" href="{{route('profile')}}"><span class="mx-2"></span>{{Auth::user()->name}}</a>
                 </li>
                 <li class="nav-item">
                   <form action="{{route('logout')}}" method="post">

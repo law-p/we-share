@@ -10,7 +10,7 @@ class DashboadController extends Controller
 {
     public function index()
     {
-        $shares = Share::query()->with('user', 'comments.user'); // Initialize $shares as a query builder instance
+        $shares = Share::query()->with('user', 'comments.user')->latest(); // Initialize $shares as a query builder instance
 
         if (request()->has('search')) {
             $shares = $shares->where('content', '%' . request()->input('search') . '%');

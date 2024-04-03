@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboadController;
+use App\Http\Controllers\FeedController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\ShowController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\ShareLikeController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController; 
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,15 +40,16 @@ Route::post('/share/{share}/comments', [CommentController::class, 'store'] )->na
 Route::get('/register', [RegisterController::class, 'register'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/login', [LoginController::class, 'index']);
-Route::get('/login', [LoginController::class, 'login'])->name('login');
-Route::post('/login', [LoginController::class, 'auth']);
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
+Route::get('/login', [LoginController::class, 'login'])->middleware('guest')->name('login');
+Route::post('/login', [LoginController::class, 'auth'])->middleware('guest')->name('login');
 
-Route::get('/profile', [UserController::class, 'profile'])->middleware('auth');
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
+
+Route::get('/profile', [UserController::class, 'profile'])->middleware('auth')->name('profile');
 Route::resource('users', UserController::class)->only('edit', 'update')->middleware('auth');
 Route::resource('users', UserController::class)->only('show');
-Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+Route::get('/profile', [UserController::class, 'profile'])->middleware('auth')->name('profile');
 
 
 Route::post('users/{user}/follow', [FollowerController::class,'follow'])->middleware('auth')->name('users.follow');
@@ -55,3 +58,8 @@ Route::post('users/{user}/unfollow', [FollowerController::class,'unfollow'])->mi
 
 Route::post('shares/{share}/like', [ShareLikeController::class,'like'])->middleware('auth')->name('shares.like');
 Route::post('shares/{share}/unlike', [ShareLikeController::class,'unlike'])->middleware('auth')->name('shares.unlike');
+
+Route::get('/feed', FeedController::class)->name('feed')->middleware('auth');
+
+
+Route::get('/admin', [AdminDashboardController::class, 'index'] )->name('admin.dashboard')->middleware(['auth', 'can:admin']);
