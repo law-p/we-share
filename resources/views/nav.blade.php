@@ -8,10 +8,11 @@
             <ul class="navbar-nav">
                 @guest
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{route('login')}}">Login</a>
+                    <a class="{{(Route::is('login')) ? 'text-white bg-success' : '' }}" href="{{route('login')}}">Login</a>
                 </li>
+                <span class="mx-2"></span>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('register')}}">Register</a>
+                    <a class="{{(Route::is('register')) ? 'text-white bg-success' : '' }}" href="{{route('register')}}">Register</a>
                 </li>
                 @endguest
                 

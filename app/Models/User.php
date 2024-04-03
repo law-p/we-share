@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     //shares relationship
     public function shares(){
-        return $this->hasMany(Share::class)->latest();
+        return $this->hasMany(Share::class);
 }
 
 //comments relationship
@@ -74,5 +74,13 @@ public function getImageURL(){
         return "https://api.dicebear.com/6.x/fun-emoji/svg?seed={{$this->name}}";
     }
    }
+
+   public function likes(){
+    return $this->belongsToMany(share::class, 'share_like')->withTimestamps();
+   }
+
+   public function likeShare(Share $share){
+    return $this->likes()->where('share_id', $share->id)->exists();
+}
    
 }

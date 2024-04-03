@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class share extends Model
 {
     use HasFactory;
-     protected $fillable = ['content', 'likes', 'user_id'];
+     protected $fillable = ['content', 'user_id'];
 
      public function comments(){
         return $this->hasMany(comment::class);
@@ -17,5 +17,9 @@ class share extends Model
 
      public function User(){
       return $this->belongsTo(User::class);
+     }
+
+     public function likes(){
+      return $this->belongsToMany(User::class, 'share_like')->withTimestamps();
      }
 }
