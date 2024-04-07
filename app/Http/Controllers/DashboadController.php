@@ -13,11 +13,12 @@ class DashboadController extends Controller
         $shares = Share::query()->with('user', 'comments.user')->latest(); // Initialize $shares as a query builder instance
 
         if (request()->has('search')) {
-            $shares = $shares->where('content', '%' . request()->input('search') . '%');
+            $searchTerm = '%' . request()->input('search') . '%';
+            $shares = $shares->where('content', 'LIKE', $searchTerm);
         }
 
         $shares = $shares->paginate(10);
-
-        return view('dashboard', compact('shares'));
+    
+        return view( 'dashboard', compact('shares'));
     }
 }
