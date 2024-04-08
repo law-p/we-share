@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
-    protected $fillable = ['content', 'user_id', 'share_id'];
+
+    protected $fillable = [ 'user_id'];
 
     public function shares(){
         return $this->hasMany(Share::class);
@@ -17,5 +18,6 @@ class Comment extends Model
 public function user(){
     return $this->belongsTo(User::class);
 }
+
 
 }

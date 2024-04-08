@@ -31,7 +31,9 @@ class AuthServiceProvider extends ServiceProvider
             return (bool) $user->is_admin;
         });
 
-        
+        Gate::define('delete-comment', function ($user, $comment) {
+            return $user->id === $comment->user_id || $user->is_admin;
+        });    
         
     }
 }

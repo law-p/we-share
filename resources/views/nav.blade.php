@@ -19,7 +19,7 @@
                 @auth
                 @if (Auth::user()->is_admin)
                 <li class="nav-item">
-                   <button class="btn btn-danger btn-sm"> <a class="nav-link text-white" href="{{route('admin.dashboard')}}"><span class="mx-2 text-dark"></span>Go To Admin Dashboard</a></button>
+                   <button class="btn btn-success btn-sm"> <a class="nav-link text-white" href="{{route('admin.dashboard')}}"><span class="mx-2 text-dark"></span>Go To Admin Dashboard</a></button>
                 </li>
                 @endif
                 <li class="nav-item">

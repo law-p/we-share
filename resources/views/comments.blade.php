@@ -1,8 +1,9 @@
 <div>
-    <form method="POST" action="{{route('weshare.comments.store', $share->id)}}"> 
+    <form method="POST" action="{{route('weshare.store', $share->id)}}"> 
         @csrf
     <div class="mb-3">
         <textarea name="content" class="fs-6 form-control" rows="1"></textarea>
+      
     </div>
     <div>
         <button type="submit" class="btn btn-primary btn-sm"> Post Comment </button>
