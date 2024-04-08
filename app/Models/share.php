@@ -20,6 +20,6 @@ class Share extends Model
      }
 
      public function likes(){
-      return $this->belongsToMany(User::class, 'share_like')->withTimestamps();
+      return $this->belongsToMany(User::class,  'share_like')->withTimestamps();
      }
 }
