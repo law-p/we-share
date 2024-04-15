@@ -6,7 +6,7 @@ We-Share is a powerful social networking application built using the Laravel PHP
 
 <b>User Profiles:</b> Users can create personalized profiles with profile pictures, bios, and other customizable details to showcase their personality and interests.
 
-<b>Tweeting:</b> LaravelTweet allows users to compose and share tweets of up to 280 characters, enabling them to express themselves concisely and creatively.
+<b>Tweeting:</b> It allows users to compose and share tweets of up to 280 characters, enabling them to express themselves concisely and creatively.
 
 <b>Follow and Unfollow:</b> Users can follow other users to stay updated with their tweets and activities. Additionally, they can unfollow users at any time to manage their timeline.
 
